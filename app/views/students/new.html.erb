@@ -1,7 +1,13 @@
 <h1>Make a new student!<h1>
-<form action="students/new" action="post">
-  <label>Student Name<lable>
 
-  <input type="text" placeholder="name">
-  </form>
-<button>Add Student!</button>
+<%= form_for @student do |f| %>
+  <div class="field">
+    <%= f.label :name, "Student Name" %>
+  </div>
+  <div class="field">
+    <%= f.text_field :name, placeholder: "Name" %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "Add" %>
+  </div
+<% end %>
