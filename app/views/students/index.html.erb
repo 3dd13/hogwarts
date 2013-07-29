@@ -1,4 +1,7 @@
-<h1>Here are hte students</h2>
-<% @students.each do |studet| %>
-<li><a href=''<%= @student.name %>''</li>
-<%= end %>
+<h1>Here are the students</h1>
+
+<ul>
+  <% @students.each do |student| %>
+  <li><%= link_to student.name, student %></li>
+  <% end %>
+</ul>
