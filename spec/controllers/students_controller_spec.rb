@@ -64,4 +64,17 @@ describe StudentsController do
       student.name.should eq TEST_STUDENT_NAME
     end
   end
+
+  describe "GET 'new" do
+    it "returns http success" do
+      get 'new'
+      response.should be_success
+    end
+
+    it "should assigns @student" do
+      get 'new'
+      assigns(:student).should_not be_nil
+      assigns(:student).should be_new_record
+    end
+  end
 end

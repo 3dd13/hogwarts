@@ -17,9 +17,6 @@ class StudentsController < ApplicationController
   end
 
   def new
-    new_student = Student.new(parmas)
-    student = Student.create
-    house << student
-    redirect to 'idnex'
+    @student = Student.new
   end
 end
