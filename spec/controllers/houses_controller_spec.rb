@@ -35,5 +35,10 @@ describe HousesController do
       get 'show', id: @house.to_param
       response.should be_success
     end
+
+    it "should assigns @house" do
+      get 'show', id: @house.to_param
+      assigns(:house).should eq @house
+    end
   end
 end
