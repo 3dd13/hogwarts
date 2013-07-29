@@ -40,5 +40,35 @@ describe HousesController do
       get 'show', id: @house.to_param
       assigns(:house).should eq @house
     end
+
+    context "when there is no students assigned to the house" do
+      it "should assigns empty array to @students" do
+        get 'show', id: @house.to_param
+        assigns(:students).should eq []
+      end
+    end
+
+    context "when there is a student assigned to the house" do
+      before(:each) do
+        @student = FactoryGirl.create(:student, house: @house)
+      end
+
+      it "should assigns @students" do
+        get 'show', id: @house.to_param
+        assigns(:students).should eq [@student]
+      end
+    end
+
+    context "when there is a student assigned to another house" do
+      before(:each) do
+        @another_house = FactoryGirl.create(:house)
+        @student = FactoryGirl.create(:student, house: @another_house)
+      end
+
+      it "should assigns empty array to @students" do
+        get 'show', id: @house.to_param
+        assigns(:students).should eq []
+      end
+    end
   end
 end

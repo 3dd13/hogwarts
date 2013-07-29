@@ -4,6 +4,7 @@ class HousesController < ApplicationController
   end
 
   def show
-    @house = House.find(params[:id])
+    @house = House.includes(:students).find(params[:id])
+    @students = @house.students
   end
 end
