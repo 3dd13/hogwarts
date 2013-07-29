@@ -25,4 +25,20 @@ describe StudentsController do
       end
     end
   end
+
+  describe "GET 'show" do
+    before(:each) do
+      @student = FactoryGirl.create(:student)
+    end
+
+    it "returns http success" do
+      get 'show', id: @student.to_param
+      response.should be_success
+    end
+
+    it "should assigns @student" do
+      get 'show', id: @student.to_param
+      assigns(:student).should eq @student
+    end
+  end
 end
