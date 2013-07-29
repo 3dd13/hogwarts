@@ -15,6 +15,10 @@
     <%= link_to "View Students", students_path %>
   </div>
 
+  <div id="notice">
+    <%= flash[:notice] %>
+  </div>
+
   <%= yield %>
 
 </body>

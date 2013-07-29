@@ -43,25 +43,46 @@ describe StudentsController do
   end
 
   describe "POST 'create" do
-    TEST_STUDENT_NAME = "DEADBEEF"
-
-    def post_create
-      post 'create', student: {name: TEST_STUDENT_NAME}
+    before(:each) do
+      @house = FactoryGirl.create(:house)
     end
 
-    it "returns http success" do
-      post_create
-      response.should redirect_to students_path
+    context "when the attributes are valid" do
+      TEST_STUDENT_NAME = "DEADBEEF"
+
+      def post_valid_create
+        post 'create', student: {name: TEST_STUDENT_NAME}
+      end
+
+      it "returns http success" do
+        post_valid_create
+        response.should redirect_to students_path
+      end
+
+      it "should create student" do
+        expect {post_valid_create}.to change{Student.count}.from(0).to(1)
+      end
+
+      it "should create student with name provided" do
+        post_valid_create
+        student = Student.last
+        student.name.should eq TEST_STUDENT_NAME
+      end
     end
 
-    it "should create student" do
-      expect {post_create}.to change{Student.count}.from(0).to(1)
-    end
+    context "when the attributes are invalid" do
+      def post_invalid_create
+        post 'create', student: {}
+      end
 
-    it "should create student with name provided" do
-      post_create
-      student = Student.last
-      student.name.should eq TEST_STUDENT_NAME
+      it "returns http success" do
+        post_invalid_create
+        response.should be_success
+      end
+
+      it "should not create student" do
+        expect {post_invalid_create}.not_to change{Student.count}
+      end
     end
   end
 
