@@ -41,4 +41,27 @@ describe StudentsController do
       assigns(:student).should eq @student
     end
   end
+
+  describe "POST 'create" do
+    TEST_STUDENT_NAME = "DEADBEEF"
+
+    def post_create
+      post 'create', student: {name: TEST_STUDENT_NAME}
+    end
+
+    it "returns http success" do
+      post_create
+      response.should redirect_to students_path
+    end
+
+    it "should create student" do
+      expect {post_create}.to change{Student.count}.from(0).to(1)
+    end
+
+    it "should create student with name provided" do
+      post_create
+      student = Student.last
+      student.name.should eq TEST_STUDENT_NAME
+    end
+  end
 end
