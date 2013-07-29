@@ -8,6 +8,13 @@
 </head>
 <body>
 
+  <div>
+    Menu:
+    <%= link_to "Home", root_path %> |
+    <%= link_to "View Houses", houses_path %> |
+    <%= link_to "View Students", students_path %>
+  </div>
+
   <%= yield %>
 
 </body>
